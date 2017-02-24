@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        {{b}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                a:5
+            },
+            computed:{
+               b:function(){
+                   return this.a+4
+               }
+            }
+        })
+    </script>
+</body>
+</html>

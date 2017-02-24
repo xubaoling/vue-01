@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>响应的数据绑定</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+hello{{name}}
+</div>
+<script>
+    //model
+    var exampleData = {
+        name:" xubaoling"
+    };
+    // 创建一个 Vue 实例或 "ViewModel"
+    // 它连接 View 与 Model
+    var mv = new Vue({
+        el:"#app",
+        data:exampleData
+    })
+</script>
+</body>
+</html>

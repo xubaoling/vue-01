@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>v-show</title>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <script src="../js/vue.js"></script>
+    <script>
+        window.onload= function () {
+
+            new Vue ({
+
+                el:"#box",
+                data:{
+                    a:true
+                },
+                methods:{
+                    show:function(){
+
+                        this.a = !this.a
+                    }
+                }
+            })
+        };
+    </script>
+</head>
+<body>
+<div id="box">
+
+    <button class="btn btn-success" v-on:click="show()"> toggle</button>
+    <hr/>
+    <button class=" btn btn-success" v-on:click="a=false">click Me</button>
+    <hr/>
+    <div style="width: 100px;height: 100px;background-color: red" v-show="a"></div>
+
+</div>
+</body>
+</html>

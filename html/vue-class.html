@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>vue-class</title>
+    <style>
+        .red{
+            color: chartreuse;
+        }
+        .bgColor{
+            background-color: #31b0d5;
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+        }
+    </style>
+    <script src="../js/vue.js"></script>
+    <script>
+        window.onload=function(){
+
+            new Vue({
+
+                el:"#box",
+               /* data:{
+                    redData:"red",
+                    bg:"bgColor"
+                }*/
+                /*data:{
+                    redData:true,
+                    bg:true
+                }*/
+                data:{
+                    json:{
+                        red:true,
+                        bgColor:true
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+
+    <!--<b :class="[redData,bg]">文字...</b>-->
+    <!--<b :class="{red:redData,bgColor:bg}">文字...</b>-->
+    <b :class="json">文字...</b>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>computed</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    firstName :<input type="text" v-model="firstName"/><br/><br/>
+    secondName:<input type="text" v-model="secondName"/><br/><br/>
+    fullName:<input type="text" v-model="fullName">
+    <p>你输入的firstName是：{{firstName}}</p>
+    <p>你输入的secondName是：{{secondName}}</p>
+    <p>你输入的fullName是：{{fullName}}</p>
+</div>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            firstName:"xu",
+            secondName:"baoling"
+        },
+        computed:{
+            fullName:function(){
+                return this.firstName+" "+this.secondName
+            }
+        }
+    })
+</script>
+</body>
+</html>

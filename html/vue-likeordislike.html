@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>likeordislike</title>
+    <style>
+        .green{
+            background-color: green;
+        }
+        .red{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <counter heading="likes" color="green"></counter>
+    <counter heading="disLikes" color="red"></counter>
+</div>
+<template id="templateM">
+
+    <h1>{{heading}}</h1>
+    <button @click="count += 1" style="background-color: {{color}}">{{count}}</button>
+    <!--<button @click="count += 1" v-bind:background-color="color">{{count}}</button>-->
+    <!--<button @click="count += 1" :class=" color='green' ? 'green' : 'red' ">{{count}}</button>-->
+
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+        Vue.component("counter",{
+            template:"#templateM",
+            props:["heading","color"],
+            data:{
+                redData:"red"
+//              return {count:0}
+            }
+
+
+        });
+    new Vue({
+        el:"#app"
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+    <style>
+        body {
+            font-family: Helvetica Neue, Arial, sans-serif;
+            font-size: 14px;
+            color: #444;
+        }
+
+        table {
+            border: 2px solid #42b983;
+            border-radius: 3px;
+            background-color: #fff;
+        }
+
+        th {
+            background-color: #42b983;
+            color: rgba(255,255,255,0.66);
+            cursor: pointer;
+            /* -webkit-user-select: none;
+             -moz-user-select: none;
+             -user-select: none;*/
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        th, td {
+            min-width: 120px;
+            padding: 10px 20px;
+        }
+
+        #search {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            //注册并实例组件
+            Vue.component('demo-grid',{
+                template:"#grid-template",
+                props: {
+                    data: Array,
+                    data2: Array,
+
+                    columns: Array,
+                    columns2: Array,
+                    filterKey:String
+                },
+                data: function () {
+                    var sortOrders = {}
+                    this.columns.forEach(function (key) {
+                        sortOrders[key] = 1
+                    })
+                    return {
+                        sortKey: 'name',
+                        sortOrders: sortOrders
+                    }
+                },
+                methods: {
+                    sortBy: function (key) {
+                        this.sortKey = key
+                        this.sortOrders[key] = this.sortOrders[key] * -1
+                    }
+                }
+            });
+            // 录入数据
+            var demo = new Vue({
+                el: '#demo',
+                data: {
+                    gridColumns: ['name'],
+                    gridColumns2:['power'],
+                    gridData: [
+                        { name: 'Chuck Norris', power: Infinity },
+                        { name: 'Bruce Lee',power: 9000  },
+                        { name: 'Jackie Chan',power: 7000},
+                        { name: 'Jet Li',power: 8000 }
+                    ],
+                    //  gridData2: [
+                    // { power: Infinity },
+                    // { power: 9000 },
+                    // { power: 7000 },
+                    // { power: 8000 }
+                    // ],
+                    searchQuery:"",
+                },
+
+
+            })
+
+        }
+    </script>
+</head>
+<body>
+<div id="demo">
+    <form id="search">
+        Search <input name="query" v-model="searchQuery">
+    </form>
+    <demo-grid
+            :data="gridData"
+            :data2="gridData2"
+            :columns="gridColumns"
+            :columns2="gridColumns2"
+            :filter-key="searchQuery">
+    </demo-grid>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<!-- 定义组件 -->
+<script type="text/x-template" id="grid-template">
+    <table>
+        <thead>
+        <tr>
+            <th v-for="key in columns" @click="sortBy(key)">
+                {{key | capitalize}}
+            </th>
+            <th v-for="key in columns2" @click="sortBy(key)">
+                {{key | capitalize}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="entry in data | orderBy sortKey sortOrders[sortKey]">
+            <td v-for="key in columns ">{{entry[key] }}</td>
+            <td v-for="key in columns2  ">{{entry[key]}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+</script>
+</body>
+<ml>

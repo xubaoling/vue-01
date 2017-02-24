@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>todolist</title>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <script src="../js/jquery-1.11.3.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+<div class="container" id="box">
+    <!--class="form-horizontal"-->
+    <form role="form" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-2 control-label">姓名:</label>
+
+        <div class="col-xs-10">
+            <input type="text" class="form-control" placeholder="姓名" v-model="name">
+        </div>
+    </div>
+    <div class="col-xs-12">&nbsp;</div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label">年龄:</label>
+
+        <div class="col-xs-10">
+            <input type="text" class="form-control" placeholder="年龄" v-model="age">
+        </div>
+    </div>
+    <div class="col-xs-12">&nbsp;</div>
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <button class="btn btn-success btn-sm" v-on:click="add($event)">添加</button>
+            <!--<button class="btn btn-success btn-sm" v-on:click.prevent="add($event)">添加</button>-->
+
+            <button class="btn btn-danger btn-sm" type="reset">重置</button>
+        </div>
+    </div>
+    </form>
+    <hr/>
+    <table class="table table-bordered table-hover">
+        <caption class="h3 text-danger text-center">用户信息表</caption>
+        <tr>
+            <th class="text-center">序号</th>
+            <th class="text-center">名字</th>
+            <th class="text-center">年龄</th>
+            <th class="text-center">操作</th>
+        </tr>
+
+        <tr v-for="x in myData">
+            <td>{{$index+1}}</td>
+            <td>{{x.name}}</td>
+            <td>{{x.age}}</td>
+            <td>
+                <button class="btn  btn-sm btn-danger" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=$index">删除</button>
+            </td>
+        </tr>
+        <tr v-show="myData.length!=0">
+            <td colspan="4 " class="text-center">
+                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer" @click="nowIndex='-2'">删除全部</button>
+            </td>
+        </tr>
+        <tr class="text-center text-muted" v-show="myData.length==0">
+            <td colspan="4" class="text-center">
+                <p>暂无数据...</p>
+            </td>
+        </tr>
+    </table>
+
+    <!--模态框-->
+    <div role="dialog" class="modal fade" id="layer" data-index="{{nowIndex}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title allDelete">
+                        确认删除么？
+                    </h4>
+                </div>
+                <div class="modal-body text-right">
+                    <button class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                    <button class="btn btn-danger btn-sm" data-dismiss="modal" @click="deleteMsg(nowIndex)">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    //        window.onload = function () {
+
+    var vue = new Vue({
+        el: "#box",
+        data: {
+            myData: [],
+            name: "",
+            age: "",
+            nowIndex:-100
+
+        },
+
+        methods: {
+
+            add: function (event) {
+
+                this.myData.push(
+
+                    {name: this.name, age: this.age}
+
+                );
+                event.preventDefault();
+                this.name="";
+                this.age="";
+
+            },
+            deleteMsg:function(index){
+
+
+                if(index == -2){
+                    this.myData=[];
+                }else{
+                    this.myData.splice(index,1);
+                }
+            }
+
+        }
+    })
+
+</script>
+</body>
+</html>

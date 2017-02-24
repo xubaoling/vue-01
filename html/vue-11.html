@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>绑定 HTML Class</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .style{
+            width: 10%;
+            /*overflow: hidden;*/
+            background-color: #c9302c;
+        }
+        .div1{
+            color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="style" v-bind:class="{'div1':div1,'div2':div2}">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis consequatur cupiditate delectus eius est, eveniet explicabo fuga harum iste iusto minima minus nisi repellat rerum similique sit temporibus vero.
+
+</div>
+<script>
+    var vm = new Vue({
+
+        el:"#app",
+        data:{
+            div1:true,
+            div2:false
+        }
+    });
+</script>
+</body>
+</html>
